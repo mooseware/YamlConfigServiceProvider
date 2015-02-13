@@ -13,14 +13,15 @@ class YamlConfigServiceProvider implements ServiceProviderInterface
         $configPath = "",
         $configFile = "";
 
-    public function __construct(Array $params) {
-        if ( isset($params['envVarName']) and ! empty($_SERVER[$params['envVarName']]))
-            $this->environment = $_SERVER[$params['envVarName']];
+    public function __construct($params = []) {
+        $envVarName = (isset($params['envVarName'])) ? $params['envVarName'] : 'APP_ENV';
+        $configPath = ($params['configPath']) ? $params['configPath'] : __DIR__ . '/../config';
 
-        if (isset($params['configPath']))
-            $this->configPath = realpath($params['configPath']);
+        if ( ! empty($_SERVER[$envVarName]))
+            $this->environment = $_SERVER[$envVarName];
 
-        $this->configFile = $this->configPath . DIRECTORY_SEPARATOR . "config." . $this->environment . ".yaml";
+        $this->configPath = realpath($configPath);
+        $this->configFile = $this->configPath . DIRECTORY_SEPARATOR . "config." . $this->environment . ".yml";
     }
 
     public function register(Application $app) {
