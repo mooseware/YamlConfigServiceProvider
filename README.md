@@ -36,7 +36,7 @@ Finally, after registering the provider, you can access the configuration attrib
 
 Example
 ---------------
-**config/config.dev.yml**
+**app/config/config.dev.yml**
 
     database:
         host: localhost
@@ -68,4 +68,4 @@ will show you
           
           
           
-Any approvements are welcome!
+Any improvements are welcome!
