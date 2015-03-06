@@ -1,0 +1,6 @@
+YamlTest:
+  Item1: "Test1"
+  Item2:
+    Item2Sub1: "Item2Sub1Test1"
+    Item2Sub2: "Item2Sub1Test2"
+  Item3: "Test3"
