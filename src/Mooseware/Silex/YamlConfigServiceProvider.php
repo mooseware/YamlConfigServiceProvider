@@ -10,7 +10,7 @@ class YamlConfigServiceProvider implements ServiceProviderInterface
 {
 
     protected
-        $environment = "dev",
+        $environment = "local",
         $configPath = "",
         $configFile = "";
 
@@ -27,6 +27,9 @@ class YamlConfigServiceProvider implements ServiceProviderInterface
         $this->configFile = $this->configPath . DIRECTORY_SEPARATOR . "config." . $this->environment . ".yml";
     }
 
+    /**
+     * @inheritdoc
+     */
     public function register(Application $app)
     {
         $config = $this->_parseConfigFile();
@@ -40,10 +43,16 @@ class YamlConfigServiceProvider implements ServiceProviderInterface
         }
     }
 
+    /**
+     * @inheritdoc
+     */
     public function boot(Application $app)
     {
     }
 
+    /**
+     * @return mixed
+     */
     private function _parseConfigFile()
     {
         if ( ! file_exists($this->configFile)) {
