@@ -7,7 +7,7 @@ Simply add the following line to your composer.json:
 
     "require": {
         ...
-        "mooseware/yaml-config-service-provider": "1.*",
+        "mooseware/yaml-config-service-provider": "2.*",
         ...
     }
     
