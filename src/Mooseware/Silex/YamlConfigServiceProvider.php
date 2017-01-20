@@ -2,18 +2,27 @@
 
 namespace Mooseware\Silex;
 
+use Pimple\Container;
+use Pimple\ServiceProviderInterface;
 use Silex\Application;
-use Silex\ServiceProviderInterface;
 use Symfony\Component\Yaml\Yaml;
 
+/**
+ * Class YamlConfigServiceProvider
+ * @package Mooseware\Silex
+ */
 class YamlConfigServiceProvider implements ServiceProviderInterface
 {
 
     protected
-        $environment = "local",
+        $environment = "dev",
         $configPath = "",
         $configFile = "";
 
+    /**
+     * YamlConfigServiceProvider constructor.
+     * @param array $params
+     */
     public function __construct($params = [])
     {
         $envVarName = (isset($params['envVarName'])) ? $params['envVarName'] : 'APP_ENV';
@@ -30,7 +39,7 @@ class YamlConfigServiceProvider implements ServiceProviderInterface
     /**
      * @inheritdoc
      */
-    public function register(Application $app)
+    public function register(Container $app)
     {
         $config = $this->_parseConfigFile();
 
@@ -60,7 +69,7 @@ class YamlConfigServiceProvider implements ServiceProviderInterface
                 $this->configPath));
         }
 
-        return Yaml::parse($this->configFile);
+        return Yaml::parse(file_get_contents($this->configFile));
     }
 
 }
